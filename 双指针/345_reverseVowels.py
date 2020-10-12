@@ -16,7 +16,7 @@ class Solution:
         tail = len(str)-1
 
         while head < tail:
-            if str[head].lower() in ('a','e','i','o','u') and str[tail].lower() in ('a','e','i','o','u'):
+            if str[head].lower() in ('a','e','i','o','u') and str[tail].lower() in ('a','e','i','o','u'):  # 注意坑：元音字符分大小写
                 str[head],str[tail] = str[tail],str[head]
                 head += 1
                 tail -= 1
