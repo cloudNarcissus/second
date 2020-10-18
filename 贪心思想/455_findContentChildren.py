@@ -12,10 +12,10 @@ from typing import List
 class Solution:
     @classmethod
     def findContentChildren(self, g: List[int], s: List[int]) -> int:
-        g.sort()
-        s.sort()
+        g.sort() # 需求按照从小到大排序
+        s.sort() # 供给按照从小到大排序
 
-        i = 0
+        i = 0 #
         j = 0
 
         while i < len(g):
