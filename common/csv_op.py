@@ -4,6 +4,12 @@
 # @Author : lantianyun l30001819
 # @File : csv_op.py
 
+import csv
+with open('1275442.csv','r',encoding='UTF-8') as csvIN:
+   for row in csv.reader(csvIN, delimiter=',', quotechar='"', quoting=csv.QUOTE_ALL):
+       print(row)
+
+print("======分割线===============分割线================分割线===================分割线===================")
 
 import csv
 content = open("1275442.csv", "r",encoding='UTF-8').read().replace('\\"',chr(1))
