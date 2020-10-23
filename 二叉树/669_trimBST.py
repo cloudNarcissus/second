@@ -81,6 +81,25 @@ class Solution:
 
     def trimBST(self, root: TreeNode, low: int, high: int) -> TreeNode:
         # 接下来我们看怎么剪枝。
+        # 题意是只有满足[low,high]的节点才保留下来，当某个节点的值小于low的时候，那么此节点以及此节点的左孩子就该剪掉；同理当某个节点的值大于high的时候，此节点的右孩子就该剪掉
+
+        if not root:  # 同样，有这个的目的是避免root.left 和 root.right出错
+            return None
+
+        if root.val < low:
+            # 剪掉左孩子，直接把自己的右孩子顶上去，也就是返回给上层,这里就跟上面的不剪枝有区别了，上面不剪枝的时候，无论如何都要返回root自己，而这次是返回自己的右孩子
+            return self.trimBST( root.right, low, high) # 当然肯定不能直接返回自己的右孩子了，因为自己的右孩子能不能满足条件还得再过一遍函数
+        if root.val > high:
+            # 道理跟上面一样，这次是返回左孩子
+            return self.trimBST(root.left, low, high)
+        else:
+            # 接下来就是本节点满足值域范围的情况，那就是直接把自己的左孩子设置成左树最终的根，也就是跟上面进行联动
+            root.left = self.trimBST( root.left, low, high)
+            # 右边一样
+            root.right = self.trimBST(root.right, low, high)
+            # 惯例返回自己
+            return root
+
 
 if __name__ == "__main__":
     bst = BST(nums=[1,2,3,4],root=None)
