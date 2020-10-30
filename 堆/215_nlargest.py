@@ -15,8 +15,7 @@ class Solution1:
 # 方法二： 堆
 class Solution2:
     def findKthLargest(self, nums: List[int], k: int) -> int:
-        from heapq import heapify, nlargest
-        #heapify(nums)
+        from heapq import nlargest
         return nlargest(k, nums)[-1]
 
 
