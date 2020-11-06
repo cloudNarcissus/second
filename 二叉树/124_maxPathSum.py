@@ -28,6 +28,42 @@ binary_tree = list_to_binarytree([-10,9,20,None,None,15,7])
 
 
 class Solution:
+
+    @classmethod
+    def deserialize(self, data):
+        """Decodes your encoded data to tree.
+
+        :type data: str
+        :rtype: TreeNode
+        """
+        root = None
+        if data == "":  # 空串直接返回None
+            return root
+
+        nums = data.split(',')
+        num = nums.pop(0)  # 根节点特殊处理
+        root = TreeNode(num)
+
+        from collections import deque
+        q = deque()
+
+        q.append(root)  # 构造队列，然后根节点压入以便启动循环
+
+        while q:
+            p = q.popleft()  # 每弹出一个节点，就从原列表中取走前两个数字，分别是左和右的值
+            left = nums.pop(0)
+            right = nums.pop(0)
+            left_node = TreeNode(left) if left != "None" else None  # 如果取出的是None，则说明没有左或右孩子，否则构造左右孩子节点
+            right_node = TreeNode(right) if right != "None" else None
+            if left_node:  # 如果有左孩子或者右孩子，需要把孩子压入队列
+                q.append(left_node)
+            if right_node:
+                q.append(right_node)
+            p.left = left_node
+            p.right = right_node
+
+        return root
+
     def maxPathSum(self, root: TreeNode) -> int:
 
         if root.left:
@@ -43,4 +79,5 @@ class Solution:
 
 
 s = Solution()
+root = Solution.deserialize("-10,9,20,None,None,15,7,None,None,None,None")
 print(s.maxPathSum(binary_tree))

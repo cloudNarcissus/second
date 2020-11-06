@@ -55,16 +55,30 @@ print(s.jump(nums))
 # 上面两种逆向的贪心都会超时。下面正向贪心
 # 思路就是从1开始，查看能够跳跃到哪里，然后选择最远的那个。
 
-class Solution2:
+nums = [5,9,3,2,1,0,2,3,3,1,0,0]
+class Solution3:
     def jump(self, nums: List[int]) -> int:
-        step = 0
-        for i in range(len(nums)-1):
-            for
-            maxpoint = max([nums[i+j] for j in range(1,nums[i+1])])
+        step = 1
+        i = 0
+        next_bound = 0
+        bound = nums[0]
+        if bound <= 0:
+            return 0
+        while i <= len(nums)-1:
+            # maxpoint = max([nums[i+j] for j in range(1,nums[i+1])])  如果这样做其实会再次遍历前面的，而更好的做法是找一个变量暂存最大值
+
+            if i <= bound:
+                next_bound = max(next_bound,i+nums[i])
+                i += 1
+            else:
+                step += 1
+                bound = next_bound
+                i = bound
+
+        return step
 
 
-
-s = Solution2()
+s = Solution3()
 print(s.jump(nums))
 
 
