@@ -22,6 +22,47 @@ class Solution:
         if x_size <= 1:
             return board
 
+        def bfs(x, y):
+            # 深度遍历的退出条件：超出矩阵边界或者值不为O
+            if not 0 <= x < x_size or 0 <= y < y_size or board[x][y] != 'O':
+                return
+
+            # 遍历之后设置值为-，表示没有被包围，因为参与深度遍历的起始节点就是边界上的O
+            board[x][y] = '-'
+
+            # 上下左右四个方向都遍历一遍
+            bfs[x-1][y]
+            bfs[x + 1][y]
+            bfs[x ][y-1]
+            bfs[x ][y+1]
+
+        # 然后对边界上的O进行BFS
+        for y in range(y_size):
+            bfs(0,y)
+            bfs(x_size-1,y)
+        for x in range(1,x_size-1):
+            bfs(x, 0)
+            bfs(x, y_size-1)
+
+        # 最后， -改为o ， o改为x
+        for i in range(x_size):
+            for j in range(y_size):
+                if board[i][j] == 'O':
+                    board[i][j] = 'X'
+                elif board[i][j] == '-':
+                    board[i][j] = 'O'
+
+
+
+
+
+
+        for i in range(x_size):
+            for j in
+
+
+
+
         @lru_cache()
         def modify_to_x(x, y, depend_x, depend_y):  # (depend_x, depend_y) 是 (x, y) 依赖的节点
             nonlocal board
