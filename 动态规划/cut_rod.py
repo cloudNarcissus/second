@@ -8,42 +8,45 @@ import time
 from common.cal_time import cal_time
 
 # p = [0, 1, 5, 8, 9, 10, 17, 17, 20, 21, 23, 24, 26, 27, 27, 28, 30, 33, 36, 39, 40] # 该列表的下标对应钢管长度，其值对应钢管的价格
-p = [0,1,10,8,9,10,17,17,20,24,30]
+p = [0, 1, 1, 8, 9, 10, 17, 17, 20, 24, 30]
 
 
+# 方法一：递归
 
 from functools import lru_cache
 @lru_cache()
 def cut_rod_recursive(n):
     if n <= 1 :
-        print(())
         return p[n]
     else:
         max_ = p[n] # 不分的时候的价格
-        cut = ()
+
         for i in range(1,n):
-            if max_ < p[i]+cut_rod_recursive(n-i):
-                cut  = (i, n - i)
-                max_ = p[i]+cut_rod_recursive(n-i)
-        print(cut)
+            max_ = max(max_, p[i]+cut_rod_recursive(n-i))
         return max_
 
 @cal_time
 def cut_rod_recursive_time(n):
     print(cut_rod_recursive(n))
 
-cut_rod_recursive_time(10)
+cut_rod_recursive_time(9)
 
 
 
-# 如果用动态规划思想来做：
+# 方法二：动态规划
+
 def cut_rod_dp(n):
-    r = [0]
-    for i in range(1,n+1):
-        res = 0
-        for j in range(1,i+1):
-            res = max(p[i],p[j]+r[j])
+    dp = []
+    dp.append(p[0])
+    for i in range(1,len(p)):
+        max_ = p[i]  # 不切割
+        for j in range(1,i):
+            max_ = max(max_, dp[j] + dp[i-j])
+        dp.append(max_)
 
+    print(dp[n])
+
+cut_rod_dp(3)
 
 
 
