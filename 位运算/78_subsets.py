@@ -4,11 +4,17 @@
 # @Author : lantianyun l30001819
 # @File : 78_subsets.py
 
+
+# 找出所有子集。
+
 from typing import List
 
-from itertools import combinations
 
-def subsets(self, nums: List[int]) -> List[List[int]]:
+# 方法一，直接调用库函数combinations，组合
+
+from itertools import combinations,permutations
+
+def subsets( nums: List[int]) -> List[List[int]]:
     res = []
 
     for i in range(len(nums) + 1):
@@ -16,3 +22,10 @@ def subsets(self, nums: List[int]) -> List[List[int]]:
 
     return res
 
+
+L = [1,2,3]
+print(subsets(L))
+
+
+
+#
