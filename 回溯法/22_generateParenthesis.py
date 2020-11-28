@@ -38,3 +38,32 @@ class Solution:
 from itertools import product
 for i in product('()', '()', '()', '()', '()', '()','()', '()', '()', '()', '()', '()'):
     print(i)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# 找出所有相加之和为 n 的 k 个数的组合。组合中只允许含有 1 - 9 的正整数，并且每种组合中不存在重复的数字。
+from itertools import combinations
+def find_sum_n(k, n):
+    return [list(i) for i in combinations([1,2,3,4,5,6,7,8,9], k) if sum(i)==n]
+
+
+print(find_sum_n(3,9))
+
+
+
+
+
+
+

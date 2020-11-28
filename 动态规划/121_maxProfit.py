@@ -53,5 +53,3 @@ class Solution122:
 
 
         return max(dp[len(prices)-1])
-
-    for i in enum
