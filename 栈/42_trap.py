@@ -81,7 +81,22 @@ height = [4,2,0,3,2,5]
 s3 = Solution3()
 print(s3.trap(height))
 
-
+        stack = []
+        total = 0
+        for i in range(len(height)):
+            # 如果栈顶对应的值比新值大则入栈，否则就进入pop流程
+            if stack and height[i]>height[stack[-1]]:
+                while stack :
+                    floor = stack.pop()
+                    if height[floor] >= height[i]:
+                        break
+                    if stack:
+                        total += (min(height[i],height[stack[0]]) - height[floor]) * (i - floor)
+                else:
+                    stack.append(i)
+            else:
+                stack.append(i)
+        return total
 
 # 方法4， 使用双指针
 

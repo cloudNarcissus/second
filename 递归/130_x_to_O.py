@@ -14,7 +14,7 @@ class Solution:
         """
         if not board:
             return None
-
+y
         x_size = len(board)
         if x_size <= 1:
             return board

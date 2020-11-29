@@ -149,6 +149,37 @@ class Solution:
             return root
 
 
+
+class Solution2:
+    def trimBST(self, root: TreeNode, low: int, high: int) -> TreeNode:
+
+        if root:
+            # 区间与一棵树的左右子树的位置关系分为下面五种。 其实就是用平移法，把区间从左到右移动，看看能把一棵树的左、根、右的哪些裁掉
+            if high< root.val:
+                root = self.trimBST(root.left,low,high)
+            elif low < high == root.val:
+                root.right = None
+                root.left = self.trimBST(root.left,low,high)
+
+            elif high > root.val and low < root.val:
+                root.left = self.trimBST(root.left,low,high)
+                root.right = self.trimBST(root.right,low,high)
+
+            elif root.val == low < high:
+                root.left = None
+                root.right = self.trimBST(root.right,low,high)
+
+            elif root.val == low == high :
+                root.left = None
+                root.right = None
+
+            elif low > root.val:
+                root = self.trimBST(root.right,low,high)
+
+        return root
+
+
+
 if __name__ == "__main__":
     bst = BST(nums=[11,3,2,5,15],root=None)
     print(bst.layerScan(bst.delete(bst.root, 3)))
