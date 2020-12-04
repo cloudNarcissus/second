@@ -26,3 +26,18 @@ class Solution:
 
         mid_scan(root)
         return res
+
+class Solution2:
+    def kthSmallest(self, root: TreeNode, k: int) -> int:
+
+        def scan(root):
+            if root:
+                yield scan(root.left)
+                yield root.val
+                yield scan(root.right)
+
+        it = scan(root)
+        for i in range(k):
+            res = next(it)
+        return res
+

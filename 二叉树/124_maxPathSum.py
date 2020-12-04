@@ -27,6 +27,33 @@ def list_to_binarytree(nums):
 binary_tree = list_to_binarytree([-10,9,20,None,None,15,7])
 
 
+
+
+
+class Solution(object):
+    def maxPathSum(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        self.max_sum = -sys.maxsize - 1
+
+        def scan(root):
+            if root is None:
+                return -sys.maxsize - 1
+            left = scan(root.left)
+            right = scan(root.right)
+            self.max_sum = max(self.max_sum, root.val + left + right, left, right)
+            return max(root.val, root.val + left, root.val + right)
+
+        new_max = scan(root)
+        return max(self.max_sum, new_max)
+
+s = Solution()
+root = Solution.deserialize("-10,9,20,None,None,15,7,None,None,None,None")
+print(s.maxPathSum(binary_tree))
+
+
 class Solution:
 
     @classmethod

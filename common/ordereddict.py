@@ -30,13 +30,13 @@ print(d3)
 
 from itertools import permutations
 n = 4
-k = 50
+k = 25
 a = [str(i) for i in range(1, n+1)]
 it = permutations(a, n)
-for i in range(k):
+for i in range(len(it)):
     print(next(it))
 
 
 dict1 = {1: 2, 2: 2, 3: 1, 4: 7, 5: 6, 6: 4, 7: 3, 8: 2, 9: 1}
 for k,v in enumerate(dict1.items()):
-    print()
+    print(k,v)
